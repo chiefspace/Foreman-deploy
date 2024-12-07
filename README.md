@@ -51,7 +51,14 @@ Run the following commands one by one on your EL9 (Enterprise Linux 9) system:
 
 # Ansible configuration
 
-donwload github...
+  - Download the repository:
+    ```bash
+    git clone https://github.com/enemy100/Foreman-deploy.git
+  - Go to the directory:
+    ```bash
+    cd Foreman-deploy/
+![image](https://github.com/user-attachments/assets/7212c127-1f19-48fe-8c06-f972d278c0e2)
+
 
 Adjust the variables according with your environment
 
