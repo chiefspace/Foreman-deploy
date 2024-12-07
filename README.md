@@ -91,6 +91,7 @@ The ansible will do:
 
 ![image](https://github.com/user-attachments/assets/18668f4f-bbb9-463e-8bc1-8a09b6830db8)
 ![image](https://github.com/user-attachments/assets/d04cf410-38d5-4303-9cd8-2523382cfa40)
+![image](https://github.com/user-attachments/assets/8b7bd19d-11ee-4e7b-aee1-b7c068b4fe02)
 
 
 
