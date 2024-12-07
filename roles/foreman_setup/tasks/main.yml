@@ -1,0 +1,7 @@
+---
+- include_tasks: prepare_environment.yml
+  tags: prepare_environment
+
+- include_tasks: install_foreman.yml
+  tags: install_foreman
+

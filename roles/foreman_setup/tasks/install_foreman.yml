@@ -1,0 +1,78 @@
+---
+# Import GPG keys
+- name: Import Foreman GPG key
+  rpm_key:
+    state: present
+    key: https://yum.theforeman.org/releases/3.13/RPM-GPG-KEY-foreman
+  tags: install_foreman
+
+- name: Import Puppet 8 GPG key
+  rpm_key:
+    state: present
+    key: https://yum.puppet.com/RPM-GPG-KEY-puppet
+  tags: install_foreman
+
+# Install Foreman Installer
+- name: Install foreman-installer
+  yum:
+    name: foreman-installer-katello
+    state: present
+  tags: install_foreman
+
+# Configure sysctl for IP forwarding
+- name: Set IP forwarding in sysctl.conf
+  lineinfile:
+    path: /etc/sysctl.conf
+    line: 'net.ipv4.ip_forward = 1'
+    state: present
+  tags: install_foreman
+
+- name: Apply sysctl settings
+  command: sysctl -p
+  tags: install_foreman
+
+# Initial and Final Foreman installation with additional options
+- name: Run consolidated Foreman installer with additional options
+  command: >
+    foreman-installer --scenario katello
+    --foreman-initial-organization "{{ organization }}"
+    --foreman-initial-location "{{ location }}"
+    --foreman-initial-admin-username "{{ admin_username }}"
+    --foreman-initial-admin-password "{{ admin_password }}"
+    --tuning "{{ tuning }}"
+    --enable-foreman-plugin-puppet
+    --enable-foreman-plugin-discovery
+    --enable-puppet
+    --foreman-proxy-dns true
+    --foreman-proxy-dns-managed true
+    --foreman-proxy-dns-zone "{{ dns_zone_name }}"
+    --foreman-proxy-dns-reverse "{{ dns_reverse_zone }}"
+    --foreman-proxy-dhcp true
+    --foreman-proxy-dhcp-managed true
+    --foreman-proxy-dhcp-interface "{{ interface_name }}"
+    --foreman-proxy-dhcp-range "{{ dhcp_range_start }} {{ dhcp_range_end }}"
+    --foreman-proxy-dhcp-gateway "{{ gateway }}"
+    --foreman-proxy-dhcp-nameservers "{{ dns_nameservers }}"
+    --foreman-proxy-tftp true
+    --foreman-proxy-tftp-managed true
+    --foreman-proxy-tftp-servername "{{ tftp_servername }}"
+    --foreman-proxy-tftp-root "{{ tftp_root_dir }}"
+  register: foreman_install_output
+  tags: install_foreman
+
+- name: Remove ANSI color codes from Foreman installer output
+  set_fact:
+    clean_output: "{{ foreman_install_output.stdout | regex_replace('(\u001B\\[[0-9;]*[mK])', '') }}"
+  tags: install_foreman
+
+# Display Foreman installer output
+- name: Display Foreman installer output
+  debug:
+    msg: "{{ clean_output }}"
+  tags: install_foreman
+
+# Download and extract Foreman Discovery Image
+- name: Download and extract Foreman Discovery Image
+  shell: wget -qO- https://downloads.theforeman.org/discovery/releases/latest/fdi-image-latest.tar | tar -xC /var/lib/tftpboot/boot --strip-components=1
+  tags: install_foreman
+

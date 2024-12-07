@@ -1,0 +1,9 @@
+---
+- name: Prepare and Configure Foreman server
+  hosts: localhost
+  become: true
+  vars_files:
+    - host_vars/foreman_vars.yml
+  roles:
+    - role: foreman_setup
+

@@ -1,0 +1,88 @@
+---
+# Configure hostname
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+  tags: prepare_environment
+
+# Configure network interface
+- name: Configure network interface
+  template:
+    src: "roles/foreman_setup/templates/ifcfg-deploy.j2"
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    owner: root
+    group: root
+    mode: 0644
+  tags: prepare_environment
+
+- name: Restart networking
+  service:
+    name: NetworkManager
+    state: restarted
+  tags: prepare_environment
+
+# Update hosts file
+- name: Update /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ ip_address }}  {{ hostname }}"
+    create: yes
+    state: present
+  tags: prepare_environment
+
+# Disable firewalld
+- name: Stop firewalld service
+  service:
+    name: firewalld
+    state: stopped
+  tags: prepare_environment
+
+- name: Disable firewalld at boot
+  systemd:
+    name: firewalld.service
+    enabled: no
+  tags: prepare_environment
+
+# Set SELinux to disabled mode in configuration file
+- name: Set SELinux to disabled
+  lineinfile:
+    path: /etc/selinux/config
+    line: 'SELINUX=disabled'
+    regexp: '^SELINUX='
+    create: yes
+    state: present
+  tags: prepare_environment
+
+# Disable SELinux for the current session
+- name: Disable SELinux for the current session
+  command: setenforce 0
+  tags: prepare_environment
+
+# Create directories
+- name: Create Pulp directory
+  file:
+    path: /var/lib/pulp
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: prepare_environment
+
+- name: Create PostgreSQL directory
+  file:
+    path: /var/lib/pgsql
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: prepare_environment
+
+- name: Create Puppet Labs directory
+  file:
+    path: /opt/puppetlabs
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: prepare_environment
+
