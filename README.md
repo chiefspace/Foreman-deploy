@@ -94,17 +94,29 @@ The ansible will do:
   - Download discovery kernel image
 
 
-
-3. **After installed, access the webpage**:
    ![image](https://github.com/user-attachments/assets/1db3fa2b-7550-4854-93b3-fb24c2a2be63)
-
-
-![image](https://github.com/user-attachments/assets/18668f4f-bbb9-463e-8bc1-8a09b6830db8)
-![image](https://github.com/user-attachments/assets/d04cf410-38d5-4303-9cd8-2523382cfa40)
 ![image](https://github.com/user-attachments/assets/8b7bd19d-11ee-4e7b-aee1-b7c068b4fe02)
 
+3. **Using the PXE Discovery image**
+
+Since DHCP and TFTP are now managed by katello, with one click we can create default templates for boot (or do it via the command line using hammer, which in this case, would also be possible to add to the ansible playbook. For example purposes, let's create the template like this:
+
+Go to Host -> Provisioning Setup -> Provisioning Templates.
+Click on "Build Pxe default". It will create the templates for booting via BIOS and UEFI.
+![image](https://github.com/user-attachments/assets/6367b2f6-6144-4758-aae6-4a6888a1b2a8)
+
+Start the client machine (using the host-only network)
+
+![image](https://github.com/user-attachments/assets/a7608e44-0c96-4e09-a361-c79c2179a30f)
+
+From here, the virtual machine is ready for deployment!
+![image](https://github.com/user-attachments/assets/4e904b88-b039-44fa-9f6f-9f7663f684bb)
 
 
+# Ideas
+- We can use dell ansible modules to configure iDRACS and delivery the host to Foreman
+- We can conect to Vmware/Libvirt, Openstack, etc via ansible.
+- Create a Disaster/recovery solution for Foreman with Puppet, Ansible, Pacemaker, DB HA, etc...
 
 
 
