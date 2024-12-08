@@ -1,5 +1,8 @@
-# Foreman-deploy | Katello with DHCP/DNS/TFTP and discovery image
-Fully foreman installation (DHCP/DNS/TFTP) using ansible
+# Foreman Installation with DHCP/DNS/TFTP and discovery image
+**Fully installation using ansible - RHEL9 Foreman Guide**
+- Install Forman with katello, puppet, and discovery plugin.
+- Autoconfig DCHP/DNS and TFTP.
+- Be 100% ready to use: deploy servers via PXE (using discovery image)
 
 For this, the follow Server is using:
 
@@ -13,7 +16,7 @@ For this, the follow Server is using:
 ![image](https://github.com/user-attachments/assets/88b79f6d-0263-4988-ba0a-3ead9b71eb90)
 
 **ATTENTION**:
-Foreman requires at least 20gb of RAM and 4gb of swap, to perform a normal installation, replace the value of the tunning variable of "deployment" in ansible as shown below to "default" at least.
+Foreman requires at least 20GB of RAM and 4GB of swap. To perform a standard installation, set the value of the "tuning" variable in Ansible for "deployment" to "default" or higher.
 
 https://docs.theforeman.org/3.13/Installing_Server/index-katello.html#system-requirements_foreman
 https://docs.theforeman.org/3.13/Installing_Server/index-katello.html#tuning-with-predefined-profiles_foreman
@@ -64,8 +67,8 @@ Adjust the variables according with your environment
 
 1. **Host setup**
 
-  Ansible will config the network interface, set a hostname and create, disable firewall and selinux, and create some dirs
-  adjust the variables below acording with your envirnoment
+  Ansible will configure the network interface, set the hostname, manage the firewall and SELinux (disabling them), and create some directories.
+  Adjust the variables below according to your environment.
 
 ![image](https://github.com/user-attachments/assets/1625124c-17ca-4106-a083-316953e88f78)
 
