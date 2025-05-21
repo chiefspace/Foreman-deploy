@@ -56,6 +56,11 @@
 # Disable SELinux for the current session
 - name: Disable SELinux for the current session
   command: setenforce 0
+  register: setenforce_result # Register the command's output
+  # Mark as failed ONLY if the return code is non-zero AND the error message is NOT "SELinux is disabled"
+  failed_when: "setenforce_result.rc != 0 and 'SELinux is disabled' not in setenforce_result.stderr"
+  # Mark as changed ONLY if the command executed successfully (rc == 0)
+  changed_when: "setenforce_result.rc == 0"
   tags: prepare_environment
 
 # Create directories
