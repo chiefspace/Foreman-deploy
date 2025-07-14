@@ -7,7 +7,7 @@
 For this, the follow Server is using:
 
   -  Vmware WorkStation Pro 17.6.1 (personal use | free license)
-  -  Foreman 3.13
+  -  Foreman 3.14
   -  Katello 4.15
   -  Puppet 8
   -  Ansible 8.7.0 (core 2.15.13)
@@ -18,8 +18,8 @@ For this, the follow Server is using:
 **ATTENTION**:
 Foreman requires at least 20GB of RAM and 4GB of swap. To perform a standard installation, set the value of the "tuning" variable in Ansible for "deployment" to "default" or higher.
 
-https://docs.theforeman.org/3.13/Installing_Server/index-katello.html#system-requirements_foreman
-https://docs.theforeman.org/3.13/Installing_Server/index-katello.html#tuning-with-predefined-profiles_foreman
+https://docs.theforeman.org/3.14/Installing_Server/index-katello.html#system-requirements_foreman
+https://docs.theforeman.org/3.14/Installing_Server/index-katello.html#tuning-with-predefined-profiles_foreman
 
 #Step 0: The virtual machine configuration
 
@@ -36,7 +36,7 @@ Run the following commands one by one on your EL9 (Enterprise Linux 9) system:
 
 1. **Add the Foreman repository**:
    ```bash
-   sudo dnf install https://yum.theforeman.org/releases/3.13/el9/x86_64/foreman-release.rpm -y
+   sudo dnf install https://yum.theforeman.org/releases/3.14/el9/x86_64/foreman-release.rpm -y
 2. **Add the Katello repository**:
    ```bash
    sudo dnf install https://yum.theforeman.org/katello/4.15/katello/el9/x86_64/katello-repos-latest.rpm -y
