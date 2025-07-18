@@ -4,10 +4,10 @@ interface_name: ens224
 ip_address: 192.168.2.1
 netmask: 255.255.255.0
 gateway: 192.168.2.1
-hostname: foremanserver.mydomain.com
+hostname: foremanserver.autodidaxity.com
 
 # Foreman configuration
-dns_zone_name: mydomain.com
+dns_zone_name: autodidaxity.com
 dns_reverse_zone: 2.168.192.in-addr.arpa
 dns_nameservers: 192.168.2.1
 dns_forwarders:
@@ -19,9 +19,9 @@ tftp_servername: 192.168.2.1
 tftp_root_dir: /var/lib/tftpboot
 
 # Katello configuration
-organization: My_company
-location: Site_A
-admin_username: katellouser
+organization: InpythonLLC
+location: Franklin
+admin_username: baltieri
 admin_password: 123456
 tuning: development
 
