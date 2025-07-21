@@ -4,10 +4,10 @@ interface_name: ens224
 ip_address: 192.168.2.1
 netmask: 255.255.255.0
 gateway: 192.168.2.1
-hostname: foremanserver.autodidaxity.com
+hostname: foreman.dev.autodidaxity.com
 
 # Foreman configuration
-dns_zone_name: autodidaxity.com
+dns_zone_name: dev.autodidaxity.com
 dns_reverse_zone: 2.168.192.in-addr.arpa
 dns_nameservers: 192.168.2.1
 dns_forwarders:
